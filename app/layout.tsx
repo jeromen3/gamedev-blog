@@ -5,7 +5,9 @@ import DiscordWidget from "@/components/DiscordWidget";
 import EmailWidget from "@/components/EmailWidget";
 import LeftSidebar from "@/components/LeftSidebar";
 import { CurrentSection } from "@/components/CurrentSection";
+import { Analytics } from "@vercel/analytics/next"
 
+<Analytics/>
 // src/lib/site.ts (or just at top of layout.tsx)
 export const SITE_URL = "https://example.com"; // <- CHANGE THIS ONCE
 export const SITE_NAME = "Game Dev · Coding · Math Dojo";
