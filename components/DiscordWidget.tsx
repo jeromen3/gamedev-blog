@@ -23,7 +23,7 @@ export default function DiscordWidget() {
         </p>
 
         <Link
-          href="YOUR_INVITE_URL"
+          href="https://discord.gg/NEM4Gc7fqd"
           target="_blank"
           className="discord-button"
         >

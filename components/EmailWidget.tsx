@@ -4,23 +4,50 @@ import { FormEvent, useState } from "react";
 
 export default function EmailWidget() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!email || !email.includes("@")) {
+    const trimmed = email.trim();
+
+    if (!trimmed || !trimmed.includes("@")) {
       setStatus("error");
+      setErrorMessage("Add a valid email before joining.");
       return;
     }
 
-    // TODO: hook this up to your real email provider API
-    // For now we just fake a success state.
     setStatus("submitting");
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: trimmed }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setStatus("error");
+        setErrorMessage(
+          data?.error || "Something went wrong. Try again in a moment."
+        );
+        return;
+      }
+
       setStatus("success");
       setEmail("");
-    }, 600);
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    }
   };
 
   return (
@@ -30,7 +57,8 @@ export default function EmailWidget() {
         <h3 className="email-title">Join Our Email List</h3>
 
         <p className="email-desc">
-          Occasional emails about game development, coding. No spam, just signal.
+          Occasional emails about game development and coding. No spam, just
+          signal.
         </p>
 
         <form onSubmit={handleSubmit} className="email-form">
@@ -41,7 +69,10 @@ export default function EmailWidget() {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              if (status === "error") setStatus("idle");
+              if (status === "error") {
+                setStatus("idle");
+                setErrorMessage(null);
+              }
             }}
           />
           <button
@@ -60,13 +91,13 @@ export default function EmailWidget() {
         )}
         {status === "error" && (
           <p className="email-status error">
-            Add a valid email before joining.
+            {errorMessage || "Something went wrong."}
           </p>
         )}
 
         <p className="email-footnote">
-          You can unsubscribe any time. This will eventually be powered by a
-          proper email service.
+          You can unsubscribe any time. This is powered by an external email
+          service so emails actually send and manage properly.
         </p>
       </div>
     </div>
