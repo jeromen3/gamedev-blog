@@ -2,7 +2,7 @@
 import type { MetadataRoute } from "next";
 import { allBlogs } from "contentlayer/generated";
 
-const SITE_URL = "https://example.com"; // same as layout
+const SITE_URL = "https://www.blackfarmerjournal.com/"; // same as layout
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

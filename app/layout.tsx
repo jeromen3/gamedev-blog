@@ -53,14 +53,15 @@ export default function RootLayout({
           <header className="app-header">
             <div className="app-header-left">
               <Link href="/" className="app-logo">
-                <span className="app-logo-main">RomesDev</span>
-                <span className="app-logo-sub"> Studio</span>
+                <span className="app-logo-main">BlackFarmer</span>
+                <span className="app-logo-sub"> Journal</span>
               </Link>
 
               <nav className="app-header-nav">
                 <Link href="/blog">Blog</Link>
                 <Link href="/projects">Projects</Link>
                 <Link href="/about">About</Link>
+                <Link href="/store">Store</Link>
               </nav>
             </div>
 
@@ -107,7 +108,7 @@ export default function RootLayout({
           {/* Footer */}
           <footer className="app-footer">
   <div className="app-footer-inner">
-    <span>© {new Date().getFullYear()} Game Dev · Coding · Math</span>
+    <span>© {new Date().getFullYear()} Black Farmer Journal</span>
 
     <div className="app-footer-links">
       <Link href="/privacy">Privacy Policy</Link>

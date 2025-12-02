@@ -9,6 +9,7 @@ const LABELS: { test: (p: string) => boolean; label: string }[] = [
   { test: (p) => p.startsWith("/about"), label: "About" },
   { test: (p) => p.startsWith("/privacy"), label: "Privacy Policy" },
   { test: (p) => p.startsWith("/terms"), label: "Terms of Service" },
+  { test: (p) => p.startsWith("/store"), label: "Store" },
 ];
 
 export function CurrentSection() {

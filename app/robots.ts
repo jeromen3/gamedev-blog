@@ -1,7 +1,7 @@
 // app/robots.ts
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://example.com"; // same as layout
+const SITE_URL = "https://www.blackfarmerjournal.com/"; // same as layout
 
 export default function robots(): MetadataRoute.Robots {
   return {

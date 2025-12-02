@@ -23,10 +23,8 @@ export default function HomePage() {
       <section className="space-y-3 border-b border-border/60 pb-6">
 
         <p className="text-sm text-slate-400 max-w-2xl leading-relaxed">
-          This website is where I&apos;m learning game development, coding,
-          and the math behind interactive worlds in public. My goal is to
-          understand fundamentals deeply, build real projects, and explain
-          them clearly enough that someone else can follow the path.
+          On this website I am documenting what I'm learning about agricultural science, soil systems, and the technology behind modern growing in public.
+My goal is to understand the fundamentals deeply, test them through real experiments, build tools and models that solve real problems, and explain everything clearly enough that someone else can follow the same path.
         </p>
 
         <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">

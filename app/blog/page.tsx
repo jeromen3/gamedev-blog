@@ -82,30 +82,27 @@ export default function BlogPage() {
   }, [posts, query, activeTag]);
 
   return (
-    <div className="space-y-8">
-      {/* Header copy */}
-      <header className="space-y-3">
-      </header>
+    <div className="blog-index">
+      {/* Header copy (optional, can fill later) */}
 
       {/* Search + filters card */}
-      <section className="iportant rounded-2xl border border-border/70 bg-slate-950/80 px-4 py-4 space-y-4 shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
-        {/* Top row: stats */}
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="space-y-1">
-            <h1 className="text-xs text-slate-400">
+      <section className="blog-index-filters-card">
+        {/* Top row: stats + clear button */}
+        <div className="blog-index-stats-row">
+          <div className="blog-index-stats-text">
+            <h2 className="blog-index-filter-state">
               {activeTag === "all" ? (
                 <>Browsing all topics</>
               ) : (
                 <>
                   Filtering by{" "}
-                  <span className="font-semibold capitalize">
+                  <span className="blog-index-filter-tag">
                     {activeTag}
                   </span>
-                  
                 </>
               )}
-            </h1>
-            <p className="text-[11px] text-slate-500">
+            </h2>
+            <p className="blog-index-count">
               Showing {filtered.length} of {posts.length} posts
             </p>
           </div>
@@ -117,7 +114,7 @@ export default function BlogPage() {
                 setQuery("");
                 setActiveTag("all");
               }}
-              className="text-[11px] text-slate-400 hover:text-emerald-300 underline-offset-2 hover:underline"
+              className="blog-index-clear-button"
             >
               Clear filters
             </button>
@@ -125,29 +122,26 @@ export default function BlogPage() {
         </div>
 
         {/* Search input */}
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
-          </div>
+        <div className="blog-index-search">
           <input
             type="search"
-            placeholder="Search by topic"
+            placeholder="Search by topic, concept, or keyword"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-full border border-slate-700 bg-slate-950 pl-9 pr-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/80 focus:border-emerald-500/80"
+            className="blog-index-search-input"
           />
         </div>
 
         {/* Tag filter pills */}
         {tags.length > 0 && (
-          <div className="tag-filters flex flex-wrap gap-2 text-[11px]">
+          <div className="blog-index-tag-row">
             <button
               type="button"
               onClick={() => setActiveTag("all")}
-              className={`rounded-full border px-3 py-1 transition ${
-                activeTag === "all"
-                  ? "border-emerald-500 bg-emerald-500/10 text-emerald-300"
-                  : "border-slate-700 bg-slate-950 text-slate-300 hover:border-slate-500"
-              }`}
+              className={
+                "blog-index-tag-pill" +
+                (activeTag === "all" ? " blog-index-tag-pill--active" : "")
+              }
             >
               All topics
             </button>
@@ -157,11 +151,10 @@ export default function BlogPage() {
                 key={tag}
                 type="button"
                 onClick={() => setActiveTag(tag)}
-                className={`rounded-full border px-3 py-1 capitalize transition ${
-                  activeTag === tag
-                    ? "border-emerald-500 bg-emerald-500/10 text-emerald-300"
-                    : "border-slate-700 bg-slate-950 text-slate-300 hover:border-slate-500"
-                }`}
+                className={
+                  "blog-index-tag-pill" +
+                  (activeTag === tag ? " blog-index-tag-pill--active" : "")
+                }
               >
                 {tag}
               </button>
@@ -171,45 +164,47 @@ export default function BlogPage() {
       </section>
 
       {/* Results list */}
-      <section className="space-y-4">
+      <section className="blog-index-results">
         {filtered.length === 0 ? (
-          <div className="rounded-2xl border border-border/60 bg-slate-950/70 px-4 py-4 text-xs text-slate-400">
-            No posts match that search yet. Try a different keyword or
-            clear filters.
+          <div className="blog-index-empty">
+            No posts match that search yet. Try a different keyword or clear
+            filters.
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="blog-index-list">
             {filtered.map((post) => (
               <Link
                 key={post.slug}
                 href={post.url}
-                className="group block rounded-2xl border border-border/70 bg-slate-950/70 px-4 py-4 transition-colors hover:border-emerald-500/80 hover:bg-slate-900/70"
+                className="blog-index-post-card"
               >
-                <article className="space-y-2">
+                <article className="blog-index-post-inner">
                   {/* Meta line */}
-                  <div className="time flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                  <div className="blog-index-post-meta">
                     {post.publishedAt && (
-                      <time dateTime={post.publishedAt}>
-                        {new Date(post.publishedAt).toLocaleDateString()}
+                      <time
+                        className="blog-index-post-date"
+                        dateTime={post.publishedAt}
+                      >
+                        {new Date(post.publishedAt).toLocaleDateString(
+                          undefined,
+                          { year: "numeric", month: "short", day: "numeric" }
+                        )}
                       </time>
                     )}
-                 
-                    
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-base font-semibold text-slate-50 group-hover:text-emerald-300 group-hover:underline">
+                  <h2 className="blog-index-post-title">
                     {post.title}
                   </h2>
 
                   {/* Summary */}
                   {post.summary && (
-                    <p className="text-sm text-slate-300 leading-relaxed line-clamp-3">
+                    <p className="blog-index-post-summary">
                       {post.summary}
                     </p>
                   )}
-
-                 
                 </article>
               </Link>
             ))}

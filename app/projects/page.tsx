@@ -57,20 +57,25 @@ export default function ProjectsPage() {
     <div className="space-y-10">
       {/* Intro */}
       <section className="space-y-3 border-b border-border/60 pb-4">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
-          Projects
-        </h1>
+        <h1 className="page-title">Projects</h1>
 
-        <p className="text-sm text-slate-400 max-w-2xl leading-relaxed">
-          This is my build log. It tracks prototypes, tools,
-          and systems.
-        </p>
+          <p className="page-intro">
+  This is where I build in public. Every project on this page is part of my long-term path to understand agricultural science, soil systems, plant physiology, and the technology behind modern growing. 
+</p>
 
-        <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
-          Some projects are small experiments that ship fast. Others are
-          slow, multi-year builds. This page keeps them in one place so you
-          can see what&apos;s moving.
-        </p>
+<p className="page-intro">
+  Some projects are scientific experiments, some are small tools or simulations, and some are prototypes for larger ideas. All of them represent real learning and real progress — not theory.
+</p>
+
+<h2 className="section-title">What You’ll Find Here</h2>
+
+<ul className="project-list">
+  <li><strong>Experiments</strong> — practical tests in soil, water, light, nutrients, and plant performance.</li>
+  <li><strong>Tools & Utilities</strong> — small calculators, models, and apps that solve real problems growers face.</li>
+  <li><strong>Simulations</strong> — Python or browser-based models that show how plant or soil systems work.</li>
+  <li><strong>IoT & Sensors</strong> — early prototypes for monitoring moisture, temperature, humidity, and other data.</li>
+  <li><strong>Long-Term Builds</strong> — bigger projects that evolve over months as my knowledge grows.</li>
+</ul>
       </section>
 
       
